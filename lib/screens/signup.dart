@@ -193,7 +193,7 @@ Widget buildButton(context) => ButtonWidget(
         final form = formkey.currentState!;
 
         if (form.validate()) {
-          if (form.validate()) {
+          if (form.validate() && agree == true) {
             Navigator.pushNamed(
               context,
               MyRoutes.loginRoute,
