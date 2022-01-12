@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //initialRoute: MyRoutes.loginRoute,
       routes: {
-        "/": (context) => Signup(),
+        "/": (context) => LoginScreen(),
         MyRoutes.forgotRoute: (context) => ForgotPass(),
         MyRoutes.loginRoute: (context) => LoginScreen(),
         MyRoutes.signupRoute: (context) => Signup()

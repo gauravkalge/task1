@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:task1/utils/routes.dart';
 import 'package:task1/widgets/botton_widget.dart';
-import 'package:task1/widgets/email_field.dart';
+
 import 'package:task1/widgets/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,21 +12,14 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-final formKey = GlobalKey<FormState>();
-final emailController = TextEditingController();
+late String email;
 
 class _LoginScreenState extends State<LoginScreen> {
-  @override
-  void dispose() {
-    emailController.dispose();
-
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: appname(),
         elevation: 2,
         centerTitle: true,
@@ -46,16 +39,55 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  EmailFieldWidget(controller: emailController),
-                  const SizedBox(height: 16),
-                  buildButton(context),
-                  buildNoAccount(context),
-                ],
-              ),
+            child: Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: buildInputDecoration(Icons.email, "Email"),
+                    validator: (value) {
+                      if (value == '') {
+                        return 'Please a Enter';
+                      }
+                      if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                          .hasMatch(value!)) {
+                        return 'Please a valid Email';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      email = value!;
+                    },
+                  ),
+                ),
+                Padding(
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+                    child: TextFormField(
+                      obscureText: true,
+                      keyboardType: TextInputType.text,
+                      decoration:
+                          buildInputDecoration(Icons.lock, "Confirm Password"),
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Please enter password';
+                        }
+                      },
+                    )),
+                TextButton(
+                  child: Text('Forgot password'),
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      MyRoutes.forgotRoute,
+                    );
+                  },
+                ),
+                buildButton(context),
+                buildNoAccount(context),
+              ],
             ),
           ),
         ]),
@@ -66,19 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 Widget buildButton(context) => ButtonWidget(
       text: 'LOGIN',
-      onClicked: () {
-        final form = formKey.currentState!;
-
-        if (form.validate()) {
-          final email = emailController.text;
-
-          ScaffoldMessenger.of(context)
-            ..removeCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-              content: Text('Your email is $email'),
-            ));
-        }
-      },
+      onClicked: () {},
     );
 
 Widget buildNoAccount(context) => Row(
@@ -96,3 +116,27 @@ Widget buildNoAccount(context) => Row(
         ),
       ],
     );
+InputDecoration buildInputDecoration(IconData icons, String hinttext) {
+  return InputDecoration(
+    hintText: hinttext,
+    prefixIcon: Icon(icons),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(color: Colors.green, width: 1.5),
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(
+        color: Colors.blue,
+        width: 1.5,
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(
+        color: Colors.blue,
+        width: 1.5,
+      ),
+    ),
+  );
+}
