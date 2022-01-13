@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task1/screens/homepage.dart';
 import 'package:task1/screens/signup.dart';
 
 import 'screens/forgot.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         "/": (context) => LoginScreen(),
         MyRoutes.forgotRoute: (context) => ForgotPass(),
         MyRoutes.loginRoute: (context) => LoginScreen(),
-        MyRoutes.signupRoute: (context) => Signup()
+        MyRoutes.signupRoute: (context) => Signup(),
+        MyRoutes.homeRoute: (context) => Homepage(),
       },
     );
   }

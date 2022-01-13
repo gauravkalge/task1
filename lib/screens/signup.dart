@@ -109,9 +109,9 @@ class _SignupState extends State<Signup> {
                           }
                           return null;
                         },
-                        onSaved: (value) {
-                          phone = value!;
-                        },
+                        // onSaved: (value) {
+                        //   phone = value!;
+                        // },
                       ),
                     ),
                     Padding(
@@ -174,8 +174,9 @@ class _SignupState extends State<Signup> {
                       TextButton(
                         onPressed: agree ? _doSomething : null,
                         child: buildButton(context),
-                      )
+                      ),
                     ]),
+                    buildNoAccount(context)
                   ],
                 ),
               ),
@@ -194,21 +195,32 @@ Widget buildButton(context) => ButtonWidget(
 
         if (form.validate()) {
           if (form.validate() && agree == true) {
-            Navigator.pushNamed(
+            Navigator.popAndPushNamed(
               context,
               MyRoutes.loginRoute,
             );
+            password.text = '';
+            confirmpassword.text = '';
             print("successful");
             return;
           } else {
+            showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text("Warning"),
+                content: Text("please Select the terms and condition"),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                    child: Text("okay"),
+                  ),
+                ],
+              ),
+            );
             print("UnSuccessfull");
           }
-
-          // ScaffoldMessenger.of(context)
-          //   ..removeCurrentSnackBar()
-          //   ..showSnackBar(const SnackBar(
-          //     content: Text('proccessing your data'),
-          //   ));
         }
       },
     );
@@ -237,3 +249,19 @@ InputDecoration buildInputDecoration(IconData icons, String hinttext) {
     ),
   );
 }
+
+Widget buildNoAccount(context) => Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Do you have an account?'),
+        TextButton(
+          child: Text('LOGIN'),
+          onPressed: () {
+            Navigator.popAndPushNamed(
+              context,
+              MyRoutes.loginRoute,
+            );
+          },
+        ),
+      ],
+    );

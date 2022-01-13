@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task1/utils/routes.dart';
+import 'package:task1/widgets/botton_widget.dart';
 import 'package:task1/widgets/widgets.dart';
 
 class ForgotPass extends StatefulWidget {
@@ -9,11 +10,14 @@ class ForgotPass extends StatefulWidget {
   State<ForgotPass> createState() => _ForgotPassState();
 }
 
+late String email;
+
 class _ForgotPassState extends State<ForgotPass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: appname(),
         elevation: 2,
         centerTitle: true,
@@ -22,11 +26,13 @@ class _ForgotPassState extends State<ForgotPass> {
         child: Column(
           children: [
             Center(
-              child: Image.asset(
-                'assets/forgot.jpg',
-                height: 280,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.fill,
+              child: CircleAvatar(
+                backgroundColor: Colors.blue[200],
+                radius: 80,
+                child: const Text(
+                  'TACKMECO',
+                  style: TextStyle(fontSize: 25, color: Colors.white),
+                ),
               ),
             ),
             const Text(
@@ -36,47 +42,85 @@ class _ForgotPassState extends State<ForgotPass> {
                   fontWeight: FontWeight.bold,
                   color: Colors.blue),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: Center(
-                child: Text(
-                  'Enter your email for OTP varification',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-              ),
-            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  buildEmail(),
-                  buildbutton(context, 'Send OTP'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('I already have an account?'),
-                      InkWell(
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            MyRoutes.loginRoute,
-                          );
-                        },
-                      ),
-                    ],
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      decoration: buildInputDecoration(Icons.email, "Email"),
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Please a Enter';
+                        }
+                        if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                            .hasMatch(value!)) {
+                          return 'Please a valid Email';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        email = value!;
+                      },
+                    ),
                   ),
+                  buildButton(context),
+                  buildNoAccount(context),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget buildButton(context) => ButtonWidget(
+      text: 'Send OTP',
+      onClicked: () {},
+    );
+
+Widget buildNoAccount(context) => Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Don you remember password !'),
+        TextButton(
+          child: Text('LOGIN'),
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              MyRoutes.loginRoute,
+            );
+          },
+        ),
+      ],
+    );
+InputDecoration buildInputDecoration(IconData icons, String hinttext) {
+  return InputDecoration(
+    hintText: hinttext,
+    prefixIcon: Icon(icons),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(color: Colors.green, width: 1.5),
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(
+        color: Colors.blue,
+        width: 1.5,
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      borderSide: BorderSide(
+        color: Colors.blue,
+        width: 1.5,
+      ),
+    ),
+  );
 }
