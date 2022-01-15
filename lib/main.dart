@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
       //initialRoute: MyRoutes.loginRoute,
       routes: {
         "/": (context) => LoginScreen(),
-        MyRoutes.forgotRoute: (context) => ForgotPass(),
+        MyRoutes.forgotRoute: (context) => const ForgotPass(),
         MyRoutes.loginRoute: (context) => LoginScreen(),
-        MyRoutes.signupRoute: (context) => Signup(),
-        MyRoutes.homeRoute: (context) => Homepage(),
+        MyRoutes.signupRoute: (context) => const Signup(),
+        MyRoutes.homeRoute: (context) => const Homepage(),
       },
     );
   }
