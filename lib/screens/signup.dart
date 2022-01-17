@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:task1/utils/routes.dart';
 import 'package:task1/widgets/botton_widget.dart';
 import 'package:task1/widgets/widgets.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -32,6 +33,9 @@ class _SignupState extends State<Signup> {
         title: appname(),
         elevation: 2,
         centerTitle: true,
+         actions: const <Widget>[
+         CycleThemeIconButton()
+        ],
       ),
       body: SingleChildScrollView(
         child: Form(

@@ -7,7 +7,7 @@ class MyTheme {
       fontFamily: GoogleFonts.poppins().fontFamily,
       cardColor: creamColor,
       canvasColor: Colors.white,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         color: Colors.white,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.black),
@@ -18,7 +18,7 @@ class MyTheme {
         fontFamily: GoogleFonts.poppins().fontFamily,
         cardColor: Colors.black,
         canvasColor: darkCreamColor,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           color: Colors.black,
           elevation: 0.0,
           iconTheme: IconThemeData(color: Colors.white),
@@ -26,8 +26,8 @@ class MyTheme {
       );
 
   //Colors
-  static Color creamColor = Color(0xfff5f5f5);
+  static Color creamColor = const Color(0xfff5f5f5);
   static Color darkCreamColor = Colors.grey;
-  static Color darkBluishColor = Color(0xff403b58);
+  static Color darkBluishColor = const Color(0xff403b58);
   static Color lightBluishColor = Colors.indigo;
 }

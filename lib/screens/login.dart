@@ -6,6 +6,7 @@ import 'package:task1/utils/routes.dart';
 import 'package:task1/widgets/botton_widget.dart';
 
 import 'package:task1/widgets/widgets.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -23,6 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
         title: appname(),
         elevation: 2,
         centerTitle: true,
+        actions: const <Widget>[
+         CycleThemeIconButton()
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(children: [

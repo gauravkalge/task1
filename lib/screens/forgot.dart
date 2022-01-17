@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task1/utils/routes.dart';
 import 'package:task1/widgets/botton_widget.dart';
 import 'package:task1/widgets/widgets.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 class ForgotPass extends StatefulWidget {
   const ForgotPass({Key? key}) : super(key: key);
@@ -21,6 +22,9 @@ class _ForgotPassState extends State<ForgotPass> {
         title: appname(),
         elevation: 2,
         centerTitle: true,
+         actions: const <Widget>[
+         CycleThemeIconButton()
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
