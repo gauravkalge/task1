@@ -9,25 +9,25 @@ Widget buildEmail() {
     margin: EdgeInsets.symmetric(vertical: 10),
     child:
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-      Text(
-        'Email',
-        style: TextStyle(fontSize: 16),
-      ),
-      TextField(
-        decoration: InputDecoration(
-          hintText: 'name@example.com',
-          prefixIcon: Icon(Icons.person),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
-        ),
-        keyboardType: TextInputType.emailAddress,
-        textInputAction: TextInputAction.done,
-        autofocus: true,
-      ),
+      // Text(
+      //   'Email',
+      //   style: TextStyle(fontSize: 16),
+      // ),
+      // TextFormField(
+      //   decoration: InputDecoration(
+      //     hintText: 'name@example.com',
+      //     prefixIcon: Icon(Icons.person),
+      //     border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+      //   ),
+      //   keyboardType: TextInputType.emailAddress,
+      //   textInputAction: TextInputAction.done,
+      //   autofocus: true,
+      // ),
       Text(
         'Password',
         style: TextStyle(fontSize: 16),
       ),
-      TextField(
+      TextFormField(
         decoration: InputDecoration(
           hintText: 'Password',
           // errorText: 'Password is wrong',
