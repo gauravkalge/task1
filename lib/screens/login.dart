@@ -2,11 +2,15 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:task1/utils/routes.dart';
 import 'package:task1/widgets/botton_widget.dart';
 
 import 'package:task1/widgets/widgets.dart';
 import 'package:theme_provider/theme_provider.dart';
+
+import '../auth.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -90,6 +94,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                 buildButton(context),
+                SignInButton(Buttons.Google, onPressed:() {
+                  signInWithGoogle();
+                }),
                 buildNoAccount(context),
               ],
             ),

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:task1/screens/homepage.dart';
 import 'package:task1/screens/signup.dart';
@@ -8,8 +9,14 @@ import 'screens/login.dart';
 import 'theme/mytheme.dart';
 import 'utils/routes.dart';
 
-void main() {
-  runApp(const MyApp());
+// void main() {
+//   runApp(const MyApp());
+// }
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp;
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,17 +25,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      saveThemesOnChange: true, // Auto save any theme change we do
-      loadThemeOnInit:
-          false, // Do not load the saved theme(use onInitCallback callback)
+      saveThemesOnChange: true,
+      loadThemeOnInit: false,
       onInitCallback: (controller, previouslySavedThemeFuture) async {
         String? savedTheme = await previouslySavedThemeFuture;
 
         if (savedTheme != null) {
-          // If previous theme saved, use saved theme
           controller.setTheme(savedTheme);
         } else {
-          // If previous theme not found, use platform default
           Brightness platformBrightness =
               SchedulerBinding.instance!.window.platformBrightness;
           if (platformBrightness == Brightness.dark) {
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
           } else {
             controller.setTheme('light');
           }
-          // Forget the saved theme(which were saved just now by previous lines)
+
           controller.forgetSavedTheme();
         }
       },
